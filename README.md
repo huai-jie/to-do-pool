@@ -1,6 +1,5 @@
 # `showcase_todo`
 
-![Screenshot](./static/screenshot.png)
 Experiment todo-list app built with DenoKv and Fresh.
 
 Based on [denoland/showcase_todo](https://github.com/denoland/showcase_todo)
