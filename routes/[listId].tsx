@@ -83,7 +83,6 @@ export default function Home({
       <Head>
         <title>Todo List</title>
       </Head>
-      {JSON.stringify(data)}
       <div class="p-4 mx-auto max-w-screen-md">
         <TodoListView
           initialData={data}
