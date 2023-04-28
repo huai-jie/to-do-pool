@@ -1,4 +1,4 @@
-# `showcase_todo`
+# `todo-list-app`
 
 Experiment todo-list app built with DenoKv and Fresh.
 
