@@ -104,7 +104,6 @@ export default function TodoListView(props: {
 
   return (
     <>
-      {JSON.stringify(data)}
       <div class="flex gap-2 w-full items-center justify-center py-4 xl:py-16 px-2">
         <div class="rounded w-full xl:max-w-xl">
           <div class="flex flex-col gap-4 pb-4">
@@ -132,7 +131,6 @@ export default function TodoListView(props: {
               >
                 Share to Pool
               </button>
-              {data.isShared?.toString()}
             </div>
             <div class="flex">
               <p class="opacity-50 text-sm">
