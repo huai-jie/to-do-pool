@@ -122,7 +122,7 @@ export default function TodoListView(props: {
         <div class="rounded w-full xl:max-w-xl">
           <div class="flex flex-col gap-4 pb-4">
             <div class="flex flex-row gap-2 items-center">
-              <Title key={data.title!} item={data} save={saveMeta} />
+              <Title key={data.title + ":" + Date.now()} item={data} save={saveMeta} />
               <div
                 class={`inline-block h-2 w-2 ${
                   busy ? "bg-yellow-600" : "bg-green-600"
