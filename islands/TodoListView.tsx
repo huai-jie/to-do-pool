@@ -104,13 +104,14 @@ export default function TodoListView(props: {
   const saveMeta = useCallback(async (item: TodoList) => {
     const url = new URL("/api/meta", location.href);
     url.searchParams.set("to", props.listId);
-    try{
-      await fetch(url.href, {
-        method: "POST",
-        credentials: "same-origin",
-        body: JSON.stringify(item),
-      });
-    }catch{
+    try {
+      // await fetch(url.href, {
+      //   method: "POST",
+      //   credentials: "same-origin",
+      //   body: JSON.stringify(item),
+      // });
+      axios.post(url.href, item);
+    } catch {
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
   }, []);
@@ -121,7 +122,7 @@ export default function TodoListView(props: {
         <div class="rounded w-full xl:max-w-xl">
           <div class="flex flex-col gap-4 pb-4">
             <div class="flex flex-row gap-2 items-center">
-              <Title item={data} save={saveMeta} />
+              <Title key={data.title!} item={data} save={saveMeta} />
               <div
                 class={`inline-block h-2 w-2 ${
                   busy ? "bg-yellow-600" : "bg-green-600"
@@ -314,7 +315,7 @@ function Title({
     input.current.value = item.title;
   }, []);
   return (
-    <>
+    <div class="flex items-center " {...{ "data-item-id": item.title }}>
       {!editing && (
         <>
           <h1 class="font-bold text-xl">{item.title}</h1>
@@ -353,7 +354,7 @@ function Title({
           </button>
         </>
       )}
-    </>
+    </div>
   );
 }
 
