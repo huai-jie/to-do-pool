@@ -1,7 +1,7 @@
 import { Head } from "$fresh/runtime.ts";
 import { Handlers } from "$fresh/server.ts";
 import TodoListView from "../islands/TodoListView.tsx";
-import { db, inputSchema, loadList, writeItems } from "../utils/db.ts";
+import { inputSchema, loadTodoList, writeItems } from "../utils/db.ts";
 import { TodoList } from "../shared/api.ts";
 
 export const handler: Handlers = {
@@ -15,7 +15,7 @@ export const handler: Handlers = {
         start(controller) {
           bc.addEventListener("message", async () => {
             try {
-              const data = await loadList(listId, "strong");
+              const data = await loadTodoList(listId, "strong");
               const chunk = `data: ${JSON.stringify(data)}\n\n`;
               controller.enqueue(new TextEncoder().encode(chunk));
             } catch (e) {
@@ -49,7 +49,7 @@ export const handler: Handlers = {
     }
 
     const startTime = Date.now();
-    const data = await loadList(
+    const data = await loadTodoList(
       listId,
       url.searchParams.get("consistency") === "strong" ? "strong" : "eventual",
     );
@@ -84,11 +84,7 @@ export default function Home({
         <title>Todo List</title>
       </Head>
       <div class="p-4 mx-auto max-w-screen-md">
-        <TodoListView
-          initialData={data}
-          latency={latency}
-          listId={listId}
-        />
+        <TodoListView initialData={data} latency={latency} listId={listId} />
       </div>
     </>
   );

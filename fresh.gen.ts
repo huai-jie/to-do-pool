@@ -4,17 +4,19 @@
 
 import config from "./deno.json" assert { type: "json" };
 import * as $0 from "./routes/[listId].tsx";
-import * as $1 from "./routes/api/share-to-pool.ts";
-import * as $2 from "./routes/index.tsx";
-import * as $3 from "./routes/pool.tsx";
+import * as $1 from "./routes/api/meta.ts";
+import * as $2 from "./routes/api/share-to-pool.ts";
+import * as $3 from "./routes/index.tsx";
+import * as $4 from "./routes/pool.tsx";
 import * as $$0 from "./islands/TodoListView.tsx";
 
 const manifest = {
   routes: {
     "./routes/[listId].tsx": $0,
-    "./routes/api/share-to-pool.ts": $1,
-    "./routes/index.tsx": $2,
-    "./routes/pool.tsx": $3,
+    "./routes/api/meta.ts": $1,
+    "./routes/api/share-to-pool.ts": $2,
+    "./routes/index.tsx": $3,
+    "./routes/pool.tsx": $4,
   },
   islands: {
     "./islands/TodoListView.tsx": $$0,

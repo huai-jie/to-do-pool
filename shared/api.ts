@@ -1,5 +1,7 @@
 export interface TodoList {
   isShared?: boolean;
+  title: string;
+  description: string;
   items: TodoListItem[];
 }
 
@@ -23,6 +25,13 @@ export interface PoolList {
 export interface PoolListItem {
   title: string;
   link: string;
+  createdAt: number;
+  updatedAt: number;
+}
+
+export interface TodoListMeta {
+  title: string;
+  description: string;
   createdAt: number;
   updatedAt: number;
 }

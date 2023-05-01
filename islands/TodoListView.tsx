@@ -22,7 +22,6 @@ export default function TodoListView(props: {
   useEffect(() => {
     let es = new EventSource(window.location.href);
     es.addEventListener("message", (e) => {
-      console.log(JSON.parse(e.data));
       const newData: TodoList = JSON.parse(e.data);
       setData(newData);
       setDirty(false);
@@ -102,13 +101,27 @@ export default function TodoListView(props: {
     [],
   );
 
+  const saveMeta = useCallback(async (item: TodoList) => {
+    const url = new URL("/api/meta", location.href);
+    url.searchParams.set("to", props.listId);
+    try{
+      await fetch(url.href, {
+        method: "POST",
+        credentials: "same-origin",
+        body: JSON.stringify(item),
+      });
+    }catch{
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    }
+  }, []);
+
   return (
     <>
       <div class="flex gap-2 w-full items-center justify-center py-4 xl:py-16 px-2">
         <div class="rounded w-full xl:max-w-xl">
           <div class="flex flex-col gap-4 pb-4">
             <div class="flex flex-row gap-2 items-center">
-              <h1 class="font-bold text-xl">Todo List</h1>
+              <Title item={data} save={saveMeta} />
               <div
                 class={`inline-block h-2 w-2 ${
                   busy ? "bg-yellow-600" : "bg-green-600"
@@ -276,6 +289,71 @@ function TodoItem({
         </>
       )}
     </div>
+  );
+}
+
+function Title({
+  item,
+  save,
+}: {
+  item: TodoList;
+  save: (item: TodoList) => void;
+}) {
+  const input = useRef<HTMLInputElement>(null);
+  const [editing, setEditing] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const doSave = useCallback(() => {
+    if (!input.current) return;
+    setBusy(true);
+    item.title = input.current.value;
+    save(item);
+  }, []);
+  const cancelEdit = useCallback(() => {
+    if (!input.current) return;
+    setEditing(false);
+    input.current.value = item.title;
+  }, []);
+  return (
+    <>
+      {!editing && (
+        <>
+          <h1 class="font-bold text-xl">{item.title}</h1>
+          <button
+            class="p-2 mr-2 disabled:opacity-50"
+            title="Edit"
+            onClick={() => setEditing(true)}
+            disabled={busy}
+          >
+            ✏️
+          </button>
+        </>
+      )}
+      {editing && (
+        <>
+          <input
+            class="border rounded w-full py-2 px-3 mr-4"
+            ref={input}
+            defaultValue={item.title}
+          />
+          <button
+            class="p-2 rounded mr-2 disabled:opacity-50"
+            title="Save"
+            onClick={doSave}
+            disabled={busy}
+          >
+            💾
+          </button>
+          <button
+            class="p-2 rounded disabled:opacity-50"
+            title="Cancel"
+            onClick={cancelEdit}
+            disabled={busy}
+          >
+            🚫
+          </button>
+        </>
+      )}
+    </>
   );
 }
 
