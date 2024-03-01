@@ -32,6 +32,6 @@ export interface PoolListItem {
 export interface TodoListMeta {
   title: string;
   description: string;
-  createdAt: number;
-  updatedAt: number;
+  createdAt?: number;
+  updatedAt?: number;
 }

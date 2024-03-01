@@ -38,7 +38,7 @@ export async function loadTodoList(
   };
 
   let _meta = defaultMeta;
-  const meta = await kv.get<string>(["meta", id]);
+  const meta = await kv.get<TodoListMeta>(["meta", id]);
   if (meta.value) {
     _meta = meta.value;
   }
