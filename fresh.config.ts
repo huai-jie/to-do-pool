@@ -5,4 +5,5 @@ export default {
   plugins: [
     tailwind(),
   ],
+  port: 8000
 } satisfies FreshConfig;
