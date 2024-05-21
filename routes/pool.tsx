@@ -54,7 +54,7 @@ export default function Pool({
               </div>
               <div class="flex">
                 <p class="opacity-50 text-sm">
-                  Share this page to collaborate with others.
+                  Select the project you wanna to join.
                 </p>
               </div>
               {/* todo: search */}

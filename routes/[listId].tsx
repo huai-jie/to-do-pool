@@ -81,7 +81,7 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>Todo List</title>
+        <title>to-do-pool</title>
       </Head>
       <div class="p-4 mx-auto max-w-screen-md">
         <TodoListView initialData={data} latency={latency} listId={listId} />

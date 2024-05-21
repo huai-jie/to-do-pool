@@ -185,6 +185,7 @@ export default function TodoListView(props: {
               <a
                 href="https://github.com/denoland/showcase_todo"
                 class="underline"
+                target={'_blank'}
               >
                 Source code
               </a>
